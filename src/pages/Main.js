@@ -1,6 +1,5 @@
 import React from 'react'
 import localStorage from 'localStorage'
-
 import { publishPost, getAllPosts } from '../api'
 
 class Main extends React.Component {
@@ -20,7 +19,7 @@ class Main extends React.Component {
   submitPost = event => {
     event.preventDefault()
 
-    publishPost(this.state.title, this.state.content) 
+    publishPost(this.state.title, this.state.content)
       .then(() => { this.getPosts() })
   }
 
@@ -30,8 +29,9 @@ class Main extends React.Component {
       .catch(err => console.error('Something went wrong.'))
   }
 
-  componentDidMount() { 
+  componentDidMount() {
     this.getPosts()
+
   }
 
   signout = event => {
@@ -42,43 +42,38 @@ class Main extends React.Component {
   render() {
     const posts = this.state.allPosts
     return (
-      <div style={{ width: '800px' }}>
-        <h2 className="ui center aligned icon header">
-          <i className="circular teal users icon" />
-          Welcome again, {localStorage.getItem('username')}
-        </h2>
-        
-        <form class='ui form' onSubmit={this.submitPost}>
-          <div className='field'>
-            <input type='text' name='title' value={this.state.title} placeholder='Title' onChange={this.onTextChange} />
+      <div class="ui bottom attached segment pushable">
+        <div class="ui visible inverted left vertical sidebar menu">
+          <a class="item">
+            <i class="home icon"></i>
+            Home
+          </a>
+          <a class="item">
+            <i class="block layout icon"></i>
+            Topics
+          </a>
+          <a class="item">
+            <i class="smile icon"></i>
+            Friends
+          </a>
+          <a class="item">
+            <i class="calendar icon"></i>
+            History
+          </a>
+          <a class="item">
+            <i class="power icon"></i>
+            Log out
+          </a>
+        </div>
+        <div class="pusher">
+          <div class="ui basic segment">
+            <h3 class="ui header">Content</h3>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
           </div>
-          <div className='field'>
-            <textarea 
-              name='content' 
-              placeholder='Write your post...' 
-              value={this.state.content}
-              onChange={this.onTextChange} />
-            <button className='ui primary button' style={{ margin: '16px 0'}}>Publish Post</button>
-          </div>
-        </form>
-
-        { posts.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
-          posts.map(post => //Loop
-            <div className='ui segment'>
-              <p>Published by: {post.author}</p>
-              <div>
-                Title: {post.title}
-              </div>
-              <div>
-                {post.content}
-              </div>
-            </div>
-          )
-          : null
-        }
-          
-
-        <button onClick={this.signout} className="ui button">Sign out</button>
+        </div>
       </div>
     )
   }

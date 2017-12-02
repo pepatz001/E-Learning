@@ -5,17 +5,24 @@
   "dependencies": {
     "axios": "^0.17.1",
     "express": "^4.16.2",
+    "froala-editor": "^2.7.2",
+    "jquery": "^3.2.1",
     "localStorage": "^1.0.3",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "react-froala-wysiwyg": "^2.7.2",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "react-sidemenu": "0.0.13"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "http-server": "^0.10.0"
   }
 }

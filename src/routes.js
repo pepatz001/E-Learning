@@ -8,13 +8,7 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path="/login" component={Login} />
-            {!localStorage.getItem('username') ? (
-            <Redirect to="/login" />
-            ) : (
-            <Switch>
-                <Route exact path="/" component={Main} />
-            </Switch>
-            )}
+            <Route exact path="/" component={Main} />
         </Switch>
     )
 }
