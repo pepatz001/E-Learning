@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-  baseURL: 'https://test-deploy-node-app.herokuapp.com/',
+  baseURL: 'http://localhost:3001/',
   headers: { 'Content-Type': 'application/json' }
 })
 
@@ -28,6 +28,12 @@ export const publishPost = (title, content) => {
 
 export const getAllPosts = () => {
   return axiosInstance.get('/api/post/all/')
+    .then(response => response.data)
+    .catch(error => { throw(error.response) })
+}
+
+export const getTest = () => {
+  return axiosInstance.get('/api/user/getuser')
     .then(response => response.data)
     .catch(error => { throw(error.response) })
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import './index.css';
 import { login } from '../../api'
 
 class Login extends React.Component {

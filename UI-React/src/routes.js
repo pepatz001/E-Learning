@@ -8,6 +8,7 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path="/login" component={Login} />
+            <Route exact path="/" component={Main} />
             {!localStorage.getItem('username') ? (
             <Redirect to="/login" />
             ) : (
