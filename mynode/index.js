@@ -10,12 +10,6 @@ var app = express();
 var psp = passport();
 
 
-app.get('/getDatabase', function (req, res) {
-	db.Department.find(function(err, docs) {
-		res.json(docs);
-	});
-});
-
 app.listen(process.env.PORT, () => {
      console.log('Starting node.js on port ' + process.env.PORT);
 });

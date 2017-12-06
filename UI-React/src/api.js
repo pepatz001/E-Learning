@@ -32,8 +32,8 @@ export const getAllPosts = () => {
     .catch(error => { throw(error.response) })
 }
 
-export const getTest = () => {
-  return axiosInstance.get('/api/user/getuser')
+export const getDepartment = () => {
+  return axiosInstance.get('/api/department/getContent')
     .then(response => response.data)
     .catch(error => { throw(error.response) })
 }

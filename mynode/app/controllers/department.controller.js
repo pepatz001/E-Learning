@@ -14,13 +14,14 @@ exports.getContent = (req, res, next) => {
 }
 
 exports.create = (req, res, next) => {
-    Department.find((err, department) => {
+    var department = new Department(req.body);
+    department.save((err) => {
            if (err) {
                   console.log('Failure');
                   return next(err);
            }
            else {
-                  console.log(department);
+                  console.log('Success');
                   res.json(department);
            }
     });

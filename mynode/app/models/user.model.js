@@ -34,7 +34,10 @@ var UserSchema = new Schema({
         },
         providerId: String,
         providerData: {},
-        departmentId: String
+        department: { 
+            type: String, 
+            required: 'Department is required'
+      }
 }); 
 
 UserSchema.pre('save', function(next){//hash password
