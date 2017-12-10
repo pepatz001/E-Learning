@@ -14,6 +14,13 @@ export const login = (username, password) => {
     .then(data => data)
     .catch(error => error.response)
 }
+
+export const logout = () => {
+  return axiosInstance.post('/logout')
+    .then(response => response)
+    .catch(error => { throw(error.response) })
+}
+
 export const publishPost = (title, content) => {
   const data = { 
     title: title,
@@ -36,4 +43,58 @@ export const getDepartment = () => {
   return axiosInstance.get('/api/department/getContent')
     .then(response => response.data)
     .catch(error => { throw(error.response) })
+}
+
+export const getUserDepartment = () => {
+  return axiosInstance.get('/api/user/getuser')
+    .then(response => response.data)
+    .catch(error => { throw(error.response) })
+}
+
+export const signup = (data) => {
+  return axiosInstance.post('/api/user/signup', data)
+    .then(data => data)
+    .catch(error => error.response)
+}
+
+export const deleteUser = (data) => {
+  return axiosInstance.delete('/api/user/delete/' + data._id)
+    .then(data => data)
+    .catch(error => error.response)
+}
+
+export const updateUser = (data,_id) => {
+  return axiosInstance.put('/api/user/edit/' + _id,data)
+    .then(data => data)
+    .catch(error => error.response)
+}
+
+export const deleteDepartment = (data) => {
+  return axiosInstance.delete('/api/department/delete/' + data)
+    .then(data => data)
+    .catch(error => error.response)
+}
+
+export const updateDepartment = (data) => {
+  return axiosInstance.put('/api/department/edit/',data)
+    .then(data => data)
+    .catch(error => error.response)
+}
+
+export const createDepartment = (data) => {
+  return axiosInstance.post('/api/department/create', data)
+    .then(data => data)
+    .catch(error => error.response)
+}
+
+export const updateContent = (data) => {
+  return axiosInstance.put('/api/department/editContent/',data)
+    .then(data => data)
+    .catch(error => error.response)
+}
+
+export const deleteContent = (data) => {
+  return axiosInstance.delete('/api/department/deleteContent/' + data)
+    .then(data => data)
+    .catch(error => error.response)
 }

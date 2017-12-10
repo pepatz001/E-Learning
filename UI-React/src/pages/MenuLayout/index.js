@@ -3,9 +3,14 @@ import { Container, Divider, Dropdown, Grid, Header, Image, List, Menu, Segment 
 
 class MenuLayout extends React.Component {
   
-  state = { activeItem: 'bio' }
+  state = { 
+    activeItem: 'bio',
+    //data : this.props.data
+  }
   
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name })
+  }
 
   render(){
     const { activeItem } = this.state
@@ -50,6 +55,7 @@ class MenuLayout extends React.Component {
               </Menu.Item>
             </Menu.Menu>
           </Menu.Item>
+          <Menu.Item as='a'>Log out</Menu.Item>
         </Container>
       </Menu>
     )
