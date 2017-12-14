@@ -66,7 +66,7 @@ class Main extends React.Component {
           <Menu fixed='left' inverted vertical>
             <Container>
               <Menu.Item header>
-                <Image size='massive' src='/asset/images/major-logo-1.png' style={{ marginLeft: '-0.1em' }} />
+                <Image size='massive' src='/assets/images/major-logo-1.png' style={{ marginLeft: '-0.1em' }} />
               </Menu.Item>
               <Menu.Item as='a' onClick={(e) => this.handleItemClick('','')} >Home</Menu.Item>
               { topics.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
