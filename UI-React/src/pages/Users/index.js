@@ -74,7 +74,7 @@ class Users extends React.Component {
     deleteUser = (data) => {
         console.log(data._id)
         deleteUser(data)
-        .then(window.location.reload())
+        .then(this.props.history.replace('/'))
         .catch(err => console.error('Something went wrong.'))
     }
 
@@ -92,7 +92,7 @@ class Users extends React.Component {
         }
         console.log(data)
         updateUser(data,this.state.id)
-        .then(window.location.reload())
+        .then(this.props.history.replace('/'))
         .catch(err => console.error('Something went wrong.'))
     }
 

@@ -19,7 +19,7 @@ class AdminPage extends React.Component {
         const { activeItem } = this.state
         const panes = [
             { menuItem: { content: 'Users'}, render: () => <Tab.Pane attached={false}><Users history={this.props.history}/></Tab.Pane> },
-            { menuItem: { content: 'Departments'}, render: () => <Tab.Pane attached={false}><Departments/></Tab.Pane> },
+            { menuItem: { content: 'Departments'}, render: () => <Tab.Pane attached={false}><Departments history={this.props.history}/></Tab.Pane> },
             { menuItem: { content: 'Log out' , icon: 'shutdown' , position: 'right' } , render: () => this.logout()}
           ]
 

@@ -126,13 +126,13 @@ class Departments extends React.Component {
         }
         //console.log(data)
         updateContent(data)
-        .then(window.location.reload())
+        .then(this.props.history.replace('/'))
         .catch(err => console.error('Something went wrong.'))
     }
 
     deleteContent = (_id) => {
         deleteContent(_id)
-        .then(window.location.reload())
+        .then(this.props.history.replace('/'))
         .catch(err => console.error('Something went wrong.'))
     }
 
