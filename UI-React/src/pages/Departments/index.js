@@ -143,7 +143,7 @@ class Departments extends React.Component {
         const panesContent = []
         var content = [{topic:"",name:"",code:""}]
         content = data.filter(item => item.name === department).map(list => list.content)
-        const idContent = data.map(list => list._id)
+        const idContent = data.filter(item => item.name === department).map(list => list._id)
         const topic = []
         content.forEach( v => topic.indexOf(v.topic) === -1 ? topic.push(v.topic) : null)
         //console.log(topic)
