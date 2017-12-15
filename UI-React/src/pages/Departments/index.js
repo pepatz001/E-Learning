@@ -26,7 +26,10 @@ class Departments extends React.Component {
         visible: false,
         open: false,
         topicName: "",
-        contentName: ""
+        contentName: "",
+        errorTopic: false,
+        errorContent: false,
+        errorDepartment: false,
     }
 
     toggleVisibility = () => this.setState({ visible: !this.state.visible })
@@ -84,21 +87,39 @@ class Departments extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault() //no refresh
-        const data = {
-            name: this.state.departmentName,
-            content: {
-                topic: this.state.topic,
-                name: this.state.name,
-                code: this.state.code
-            } 
+        if(this.state.departmentName === ''){
+            this.setState({ errorDepartment: true })
+        } else {
+            this.setState({ errorDepartment: false })
         }
-        console.log(data)
-        createDepartment(data)
+        if(this.state.topic === ''){
+            this.setState({ errorTopic: true })
+        } else {
+            this.setState({ errorTopic: false })
+        }
+        if(this.state.name === ''){
+            this.setState({ errorContent: true })
+        } else {
+            this.setState({ errorContent: false })
+        }
+        if(this.state.departmentName !== '' && this.state.topic !== '' && this.state.name !== ''){
+            const data = {
+                name: this.state.departmentName,
+                content: {
+                    topic: this.state.topic,
+                    name: this.state.name,
+                    code: this.state.code
+                } 
+            }
+            // console.log(data)
+            createDepartment(data)
             .then(data => {
                 if (data.status === 200) {
                     this.props.history.replace('/Crpdaz')
                 }
             })
+        }
+        
     }
 
     setOptions = (data) => {
@@ -115,19 +136,31 @@ class Departments extends React.Component {
     }
 
     saveContent = (content, code,_id) => {
-        const thisContent = {
-            topic: this.state.topicName,
-            name: this.state.contentName,
-            code: code
+        if(this.state.topicName === ''){
+            this.setState({ errorTopic: true })
+        } else {
+            this.setState({ errorTopic: false })
         }
-        const data = {
-            id: _id,
-            content: thisContent
+        if(this.state.contentName === ''){
+            this.setState({ errorContent: true })
+        } else {
+            this.setState({ errorContent: false })
         }
-        console.log(data)
-        updateContent(data)
-        .then(this.props.history.replace('/Crpdaz'))
-        .catch(err => console.error('Something went wrong.'))
+        if(this.state.topicName !== '' && this.state.contentName !== ''){
+            const thisContent = {
+                topic: this.state.topicName,
+                name: this.state.contentName,
+                code: code
+            }
+            const data = {
+                id: _id,
+                content: thisContent
+            }
+            console.log(data)
+            updateContent(data)
+            .then(this.props.history.replace('/Crpdaz'))
+            .catch(err => console.error('Something went wrong.'))
+        }
     }
 
     deleteContent = (_id) => {
@@ -184,7 +217,7 @@ class Departments extends React.Component {
                                 <label>Topic Name</label>
                             </Transition>
                             <Transition visible={this.state.visible} >
-                                <Input placeholder='Topic Name' value={this.state.topicName} onChange={this.topicChange}/>
+                                <Form.Input placeholder='Topic Name' error={this.state.errorTopic} value={this.state.topicName} onChange={this.topicChange}/>
                             </Transition>
                             <Transition visible={this.state.visible} >
                                 <Divider hidden />
@@ -193,7 +226,7 @@ class Departments extends React.Component {
                                 <label>Content Name</label>
                             </Transition>
                             <Transition visible={this.state.visible} >
-                                <Input placeholder='Content Name' value={this.state.contentName} onChange={this.contentChange}/>
+                                <Form.Input placeholder='Content Name' error={this.state.errorContent} value={this.state.contentName} onChange={this.contentChange}/>
                             </Transition>
                             </Form>
                             <Transition visible={this.state.visible} >
@@ -296,15 +329,15 @@ class Departments extends React.Component {
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Field required>
                                 <label>Department Name</label>
-                                <Dropdown placeholder='Select Department' name='departmentName' onChange={this.handleChange} fluid search allowAdditions selection options={this.state.options} onAddItem={this.handleAddition.bind(this)} />
+                                <Dropdown placeholder='Select Department' error={this.state.errorDepartment} name='departmentName' onChange={this.handleChange} fluid search allowAdditions selection options={this.state.options} onAddItem={this.handleAddition.bind(this)} />
                                 </Form.Field>
                             <Form.Field required>
                                 <label>Topic Name</label>
-                                <Form.Input name='topic' value={this.state.topic} onChange={this.handleChange} placeholder='Topic Name' />
+                                <Form.Input error={this.state.errorTopic} name='topic' value={this.state.topic} onChange={this.handleChange} placeholder='Topic Name' />
                             </Form.Field>
                             <Form.Field required>
                                 <label>Content Name</label>
-                                <Form.Input name='name' value={this.state.name} onChange={this.handleChange} placeholder='Content Name' />
+                                <Form.Input error={this.state.errorContent} name='name' value={this.state.name} onChange={this.handleChange} placeholder='Content Name' />
                             </Form.Field>
                             <Form.Field>
                                 <label>Editor</label>

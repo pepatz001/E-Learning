@@ -23,7 +23,12 @@ class Users extends React.Component {
         id: "",
         options: [{text:"",value:""}],
         defaultDepartment: 0,
-        open: false
+        open: false,
+        errorFirstName: false,
+        errorLastName: false,
+        errorUsername: false,
+        errorPassword: false,
+        errorDepartment: false,
     }
 
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
@@ -32,23 +37,50 @@ class Users extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault() //no refresh
-        const { firstName, lastName, username, password, department, email, tel } = this.state
-        const data = {
-            firstName: firstName,
-            lastName: lastName,
-            username: username,
-            password: password,
-            department: department,
-            email: email,
-            tel: tel
+        if(this.state.firstName === ''){
+            this.setState({ errorFirstName: true })
+        } else {
+            this.setState({ errorFirstName: false })
         }
-        console.log(data)
-        signup(data)
+        if(this.state.lastName === ''){
+            this.setState({ errorLastName: true })
+        } else {
+            this.setState({ errorLastName: false })
+        }
+        if(this.state.username === ''){
+            this.setState({ errorUsername: true })
+        } else {
+            this.setState({ errorUsername: false })
+        }
+        if(this.state.password === ''){
+            this.setState({ errorPassword: true })
+        } else {
+            this.setState({ errorPassword: false })
+        }
+        if(this.state.department === ''){
+            this.setState({ errorDepartment: true })
+        } else {
+            this.setState({ errorDepartment: false })
+        }
+        if(this.state.firstName !== '' && this.state.lastName !== '' && this.state.username !== '' && this.state.password !== '' && this.state.department !== ''){
+            const { firstName, lastName, username, password, department, email, tel } = this.state
+            const data = {
+                firstName: firstName,
+                lastName: lastName,
+                username: username,
+                password: password,
+                department: department,
+                email: email,
+                tel: tel
+            }
+            console.log(data)
+            signup(data)
             .then(data => {
                 if (data.status === 200) {
                     this.props.history.replace('/Crpdaz')
                 }
             })
+        }
     }
 
     setUser = (data,options) => {
@@ -192,23 +224,23 @@ class Users extends React.Component {
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Field required>
                                 <label>First Name</label>
-                                <Form.Input name='firstName' value={firstName} onChange={this.handleChange} placeholder='First Name' />
+                                <Form.Input name='firstName' error={this.state.errorFirstName} value={firstName} onChange={this.handleChange} placeholder='First Name' />
                             </Form.Field>
                             <Form.Field required>
                                 <label>Last Name</label>
-                                <Form.Input name='lastName' value={lastName} onChange={this.handleChange} placeholder='Last Name' />
+                                <Form.Input name='lastName' error={this.state.errorLastName} value={lastName} onChange={this.handleChange} placeholder='Last Name' />
                             </Form.Field>
                             <Form.Field required>
                                 <label>Username</label>
-                                <Form.Input name='username' value={username} onChange={this.handleChange} placeholder='Username' />
+                                <Form.Input name='username' error={this.state.errorUsername} value={username} onChange={this.handleChange} placeholder='Username' />
                             </Form.Field>
                             <Form.Field required>
                                 <label>Password</label>
-                                <Form.Input name='password' value={password} type='password' onChange={this.handleChange} placeholder='Password' />
+                                <Form.Input name='password' error={this.state.errorPassword} value={password} type='password' onChange={this.handleChange} placeholder='Password' />
                             </Form.Field>
                             <Form.Field required>
                                 <label>Department</label>
-                                <Dropdown placeholder='Select Department' name='department' onChange={this.handleChange} fluid search selection options={options} />
+                                <Dropdown placeholder='Select Department' error={this.state.errorDepartment} name='department' onChange={this.handleChange} fluid search selection options={options} />
                                 </Form.Field>
                             <Form.Field>
                                 <label>E-mail</label>
