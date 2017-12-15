@@ -22,7 +22,8 @@ class Users extends React.Component {
         telModal: "",
         id: "",
         options: [{text:"",value:""}],
-        defaultDepartment: 0
+        defaultDepartment: 0,
+        open: false
     }
 
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
@@ -162,7 +163,18 @@ class Users extends React.Component {
                                             </Modal.Description>
                                             </Modal.Content>
                                         </Modal>
-                                        <Button onClick={(e) => this.deleteUser(item)}><Button.Content><Icon name='remove user'/></Button.Content></Button>
+                                        <Modal size='mini' trigger={<Button content='Delete' onClick={(e) => this.setState({open: true})}/>} open={this.state.open}>
+                                            <Modal.Header>
+                                                Delete Your Account
+                                            </Modal.Header>
+                                            <Modal.Content>
+                                                <p>Are you sure you want to delete your account</p>
+                                            </Modal.Content>
+                                            <Modal.Actions>
+                                                <Button negative onClick={this.close}>No</Button>
+                                                <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={(e) => this.deleteUser(item)}/>
+                                            </Modal.Actions>
+                                        </Modal>
                                     </List.Content>
                                     {item.department}
                                     </List.Content>

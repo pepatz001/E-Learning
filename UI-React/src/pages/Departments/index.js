@@ -30,7 +30,7 @@ class Departments extends React.Component {
     }
 
     toggleVisibility = () => this.setState({ visible: !this.state.visible })
-    
+
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
     topicChange = (e, {value}) => this.setState({ topicName: value })
@@ -270,7 +270,18 @@ class Departments extends React.Component {
                                             </Modal.Description>
                                             </Modal.Content>
                                         </Modal>
-                                        <Button onClick={(e) => this.deleteDepartment(item)}><Button.Content><Icon name='remove'/></Button.Content></Button>
+                                        <Modal size='mini' trigger={<Button content='Delete' onClick={(e) => this.setState({open: true})}/>} open={this.state.open}>
+                                            <Modal.Header>
+                                                Delete Your Department
+                                            </Modal.Header>
+                                            <Modal.Content>
+                                                <p>Are you sure you want to delete your department</p>
+                                            </Modal.Content>
+                                            <Modal.Actions>
+                                                <Button negative onClick={this.close}>No</Button>
+                                                <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={(e) => this.deleteDepartment(item)}/>
+                                            </Modal.Actions>
+                                        </Modal>
                                     </List.Content>
                                 </List.Content>
                             </List.Item>
