@@ -112,21 +112,33 @@ class Users extends React.Component {
     }
 
     editUser = () => {
-        console.log(this.state)
-        const data = {
-            firstName: this.state.firstNameModal,
-            lastName: this.state.lastNameModal,
-            username: this.state.usernameModal,
-            email: this.state.emailModal,
-            tel: this.state.telModal,
-            password: this.state.passwordModal,
-            department: this.state.departmentModal
-            
+        if(this.state.firstNameModal === ''){
+            this.setState({ errorFirstName: true })
+        } else {
+            this.setState({ errorFirstName: false })
         }
-        console.log(data)
-        updateUser(data,this.state.id)
-        .then(this.props.history.replace('/Crpdaz'))
-        .catch(err => console.error('Something went wrong.'))
+        if(this.state.lastNameModal === ''){
+            this.setState({ errorLastName: true })
+        } else {
+            this.setState({ errorLastName: false })
+        }
+        if(this.state.firstNameModal !== '' && this.state.lastNameModal !== ''){
+            // console.log(this.state)
+            const data = {
+                firstName: this.state.firstNameModal,
+                lastName: this.state.lastNameModal,
+                username: this.state.usernameModal,
+                email: this.state.emailModal,
+                tel: this.state.telModal,
+                password: this.state.passwordModal,
+                department: this.state.departmentModal
+                
+            }
+            console.log(data)
+            updateUser(data,this.state.id)
+            .then(this.props.history.replace('/Crpdaz'))
+            .catch(err => console.error('Something went wrong.'))
+        }
     }
 
     componentWillMount() { 
@@ -174,11 +186,11 @@ class Users extends React.Component {
                                             <Form onSubmit={this.editUser}>
                                                 <Form.Field required>
                                                     <label>First Name</label>
-                                                    <Form.Input name='firstNameModal' value={this.state.firstNameModal} onChange={this.handleChangeModal} placeholder='First Name' />
+                                                    <Form.Input name='firstNameModal' error={this.state.errorFirstName} value={this.state.firstNameModal} onChange={this.handleChangeModal} placeholder='First Name' />
                                                 </Form.Field>
                                                 <Form.Field required>
                                                     <label>Last Name</label>
-                                                    <Form.Input name='lastNameModal' value={this.state.lastNameModal} onChange={this.handleChangeModal} placeholder='Last Name' />
+                                                    <Form.Input name='lastNameModal' error={this.state.errorLastName} value={this.state.lastNameModal} onChange={this.handleChangeModal} placeholder='Last Name' />
                                                 </Form.Field>
                                                 <Form.Field required>
                                                     <label>Department</label>
