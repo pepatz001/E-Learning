@@ -124,7 +124,7 @@ class Departments extends React.Component {
             id: _id,
             content: thisContent
         }
-        //console.log(data)
+        console.log(data)
         updateContent(data)
         .then(window.location.reload())
         .catch(err => console.error('Something went wrong.'))
@@ -143,7 +143,7 @@ class Departments extends React.Component {
         const panesContent = []
         var content = [{topic:"",name:"",code:""}]
         content = data.filter(item => item.name === department).map(list => list.content)
-        const idContent = data.map(list => list._id)
+        const idContent = data.filter(item => item.name === department).map(list => list._id)
         const topic = []
         content.forEach( v => topic.indexOf(v.topic) === -1 ? topic.push(v.topic) : null)
         //console.log(topic)

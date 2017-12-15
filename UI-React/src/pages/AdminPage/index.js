@@ -11,8 +11,8 @@ class AdminPage extends React.Component {
     }
 
     logout = () => {
-        this.props.history.replace('/login') //redirect
         localStorage.clear()
+        this.props.history.replace('/login') //redirect
     }
 
     render() {
