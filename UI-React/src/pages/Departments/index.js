@@ -55,11 +55,18 @@ class Departments extends React.Component {
         })
     }
 
+    setDeleteDepartment = (data) => {
+        this.setState({
+            departmentDelete: data,
+            open: true
+        })
+    }
+
     deleteDepartment = (data) => {
         console.log(data)
-        deleteDepartment(data)
-        .then(this.props.history.replace('/Crpdaz'))
-        .catch(err => console.error('Something went wrong.'))
+        // deleteDepartment(data)
+        // .then(this.props.history.replace('/Crpdaz'))
+        // .catch(err => console.error('Something went wrong.'))
     }
 
     editDepartment = () => {
@@ -308,7 +315,7 @@ class Departments extends React.Component {
                                             </Modal.Description>
                                             </Modal.Content>
                                         </Modal>
-                                        <Modal size='mini' trigger={<Button content='Delete' onClick={(e) => this.setState({open: true})}/>} open={this.state.open}>
+                                        <Modal size='mini' trigger={<Button content='Delete' onClick={(e) => this.setDeleteDepartment(item)}/>} open={this.state.open}>
                                             <Modal.Header>
                                                 Delete Your Department
                                             </Modal.Header>
@@ -317,7 +324,7 @@ class Departments extends React.Component {
                                             </Modal.Content>
                                             <Modal.Actions>
                                                 <Button negative onClick={this.close}>No</Button>
-                                                <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={(e) => this.deleteDepartment(item)}/>
+                                                <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={(e) => this.deleteDepartment(this.state.departmentDelete)}/>
                                             </Modal.Actions>
                                         </Modal>
                                     </List.Content>

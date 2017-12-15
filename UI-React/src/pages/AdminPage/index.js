@@ -1,10 +1,10 @@
 import React from 'react';
-import { Tab } from 'semantic-ui-react'
+import { Tab , Dimmer, Loader } from 'semantic-ui-react'
 import Users from '../Users'
 import Departments from '../Departments'
 
 class AdminPage extends React.Component {
-    state = { activeItem: 'home' }
+    state = { activeItem: 'home' , loader: true }
     
     handleItemClick = (e, { name }) => {
         this.setState({ activeItem: name })
@@ -13,6 +13,10 @@ class AdminPage extends React.Component {
     logout = () => {
         localStorage.clear()
         this.props.history.replace('/login') //redirect
+    }
+
+    componentDidMount(){
+        this.setState({ loader: false })
     }
 
     render() {
@@ -25,6 +29,9 @@ class AdminPage extends React.Component {
 
         return (
             <div>
+                <Dimmer active={this.state.loader}>
+                    <Loader>Loading</Loader>
+                </Dimmer>
                 <Tab menu={{ color:'black', inverted: true, attached: false, tabular: false }} panes={panes}/>
             </div>
         );
