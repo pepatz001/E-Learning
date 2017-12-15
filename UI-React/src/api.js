@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-  // baseURL: 'https://web-elearning.herokuapp.com/',
-  baseURL: 'http://localhost:3001/',
+  // baseURL: 'http://localhost:3001/',
+  baseURL: 'https://web-elearning.herokuapp.com/',
   headers: { 'Content-Type': 'application/json' }
 })
 

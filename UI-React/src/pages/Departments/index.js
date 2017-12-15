@@ -22,11 +22,11 @@ class Departments extends React.Component {
             { menuItem: 'Tab 2', render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
             { menuItem: 'Tab 3', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
           ],
-          code: "",
-          visible: false,
-          open: false,
-          topicName: "",
-          contentName: ""
+        code: "",
+        visible: false,
+        open: false,
+        topicName: "",
+        contentName: ""
     }
 
     toggleVisibility = () => this.setState({ visible: !this.state.visible })
@@ -55,7 +55,7 @@ class Departments extends React.Component {
     deleteDepartment = (data) => {
         console.log(data)
         deleteDepartment(data)
-        .then(window.location.reload())
+        .then(this.props.history.replace('/'))
         .catch(err => console.error('Something went wrong.'))
     }
 
@@ -67,7 +67,7 @@ class Departments extends React.Component {
         }
         console.log(data)
         updateDepartment(data)
-        .then(window.location.reload())
+        .then(this.props.history.replace('/'))
         .catch(err => console.error('Something went wrong.'))
     }
 
@@ -126,13 +126,13 @@ class Departments extends React.Component {
         }
         console.log(data)
         updateContent(data)
-        .then(window.location.reload())
+        .then(this.props.history.replace('/'))
         .catch(err => console.error('Something went wrong.'))
     }
 
     deleteContent = (_id) => {
         deleteContent(_id)
-        .then(window.location.reload())
+        .then(this.props.history.replace('/'))
         .catch(err => console.error('Something went wrong.'))
     }
 
@@ -227,8 +227,9 @@ class Departments extends React.Component {
         const names = []
         const options = []
         departments.forEach( v => names.indexOf(v.name) === -1 ? names.push(v.name) : null)
-        names.length >= 0 ?
-            names.map((item, index) => 
+        const namesSort = names.sort()
+        namesSort.length >= 0 ?
+        namesSort.map((item, index) => 
                 options.push({
                     text: item,
                     value: item
@@ -238,8 +239,8 @@ class Departments extends React.Component {
         const panes = [
             { menuItem: { content: 'All Department' , icon: "suitcase" }, 
                 pane: (
-                    names.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
-                    names.map(item => //Loop
+                    namesSort.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                    namesSort.map(item => //Loop
                         <Segment>
                             <List>
                             <List.Item>

@@ -74,7 +74,7 @@ class Users extends React.Component {
     deleteUser = (data) => {
         console.log(data._id)
         deleteUser(data)
-        .then(window.location.reload())
+        .then(this.props.history.replace('/'))
         .catch(err => console.error('Something went wrong.'))
     }
 
@@ -92,7 +92,7 @@ class Users extends React.Component {
         }
         console.log(data)
         updateUser(data,this.state.id)
-        .then(window.location.reload())
+        .then(this.props.history.replace('/'))
         .catch(err => console.error('Something went wrong.'))
     }
 
@@ -108,6 +108,7 @@ class Users extends React.Component {
     render() {
         const { firstName, lastName, username, password, department, email, tel } = this.state
         const users = this.state.allUsers.filter(item => item.department !== 'admin')
+        const usersSort = users.sort()
         const departments = this.state.allDepartments
         const names = []
         const options = []
@@ -123,8 +124,8 @@ class Users extends React.Component {
         const panes = [
             { menuItem: { content: 'All Users', icon: 'users'}, 
                 pane: (
-                    users.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
-                        users.map((item, index) => //Loop
+                    usersSort.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                        usersSort.map((item, index) => //Loop
                             <Segment>
                                 <List>
                                 <List.Item>
