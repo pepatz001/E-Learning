@@ -30,7 +30,7 @@ class Departments extends React.Component {
     }
 
     toggleVisibility = () => this.setState({ visible: !this.state.visible })
-
+    
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
     topicChange = (e, {value}) => this.setState({ topicName: value })
@@ -55,7 +55,7 @@ class Departments extends React.Component {
     deleteDepartment = (data) => {
         console.log(data)
         deleteDepartment(data)
-        .then(this.props.history.replace('/'))
+        .then(this.props.history.replace('/Crpdaz'))
         .catch(err => console.error('Something went wrong.'))
     }
 
@@ -67,7 +67,7 @@ class Departments extends React.Component {
         }
         console.log(data)
         updateDepartment(data)
-        .then(this.props.history.replace('/'))
+        .then(this.props.history.replace('/Crpdaz'))
         .catch(err => console.error('Something went wrong.'))
     }
 
@@ -96,7 +96,7 @@ class Departments extends React.Component {
         createDepartment(data)
             .then(data => {
                 if (data.status === 200) {
-                    window.location.reload()
+                    this.props.history.replace('/Crpdaz')
                 }
             })
     }
@@ -126,13 +126,13 @@ class Departments extends React.Component {
         }
         console.log(data)
         updateContent(data)
-        .then(this.props.history.replace('/'))
+        .then(this.props.history.replace('/Crpdaz'))
         .catch(err => console.error('Something went wrong.'))
     }
 
     deleteContent = (_id) => {
         deleteContent(_id)
-        .then(this.props.history.replace('/'))
+        .then(this.props.history.replace('/Crpdaz'))
         .catch(err => console.error('Something went wrong.'))
     }
 

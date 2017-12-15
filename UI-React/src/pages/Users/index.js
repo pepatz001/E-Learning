@@ -45,7 +45,7 @@ class Users extends React.Component {
         signup(data)
             .then(data => {
                 if (data.status === 200) {
-                    window.location.reload()
+                    this.props.history.replace('/Crpdaz')
                 }
             })
     }
@@ -74,7 +74,7 @@ class Users extends React.Component {
     deleteUser = (data) => {
         console.log(data._id)
         deleteUser(data)
-        .then(this.props.history.replace('/'))
+        .then(this.props.history.replace('/Crpdaz'))
         .catch(err => console.error('Something went wrong.'))
     }
 
@@ -92,7 +92,7 @@ class Users extends React.Component {
         }
         console.log(data)
         updateUser(data,this.state.id)
-        .then(this.props.history.replace('/'))
+        .then(this.props.history.replace('/Crpdaz'))
         .catch(err => console.error('Something went wrong.'))
     }
 
