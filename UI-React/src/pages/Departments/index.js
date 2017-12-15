@@ -63,10 +63,10 @@ class Departments extends React.Component {
     }
 
     deleteDepartment = (data) => {
-        console.log(data)
-        // deleteDepartment(data)
-        // .then(this.props.history.replace('/Crpdaz'))
-        // .catch(err => console.error('Something went wrong.'))
+        // console.log(data)
+        deleteDepartment(data)
+        .then(this.props.history.replace('/Crpdaz'))
+        .catch(err => console.error('Something went wrong.'))
     }
 
     editDepartment = () => {
