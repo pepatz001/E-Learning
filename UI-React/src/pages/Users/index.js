@@ -106,6 +106,8 @@ class Users extends React.Component {
         .catch(err => console.error('Something went wrong.'))
     }
 
+    close = () => this.setState({ open: false })
+
     render() {
         const { firstName, lastName, username, password, department, email, tel } = this.state
         const users = this.state.allUsers.filter(item => item.department !== 'admin')
