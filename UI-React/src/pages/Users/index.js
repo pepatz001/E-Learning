@@ -29,6 +29,7 @@ class Users extends React.Component {
         errorUsername: false,
         errorPassword: false,
         errorDepartment: false,
+        userDelete: ""
     }
 
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
@@ -81,6 +82,13 @@ class Users extends React.Component {
                 }
             })
         }
+    }
+
+    setDeleteUser = (data) => {
+        this.setState({
+            userDelete: data,
+            open: true
+        })
     }
 
     setUser = (data,options) => {
@@ -209,7 +217,7 @@ class Users extends React.Component {
                                             </Modal.Description>
                                             </Modal.Content>
                                         </Modal>
-                                        <Modal size='mini' trigger={<Button content='Delete' onClick={(e) => this.setState({open: true})}/>} open={this.state.open}>
+                                        <Modal size='mini' trigger={<Button content='Delete' onClick={(e) => this.setDeleteUser(item)}/>} open={this.state.open}>
                                             <Modal.Header>
                                                 Delete Your Account
                                             </Modal.Header>
@@ -218,7 +226,7 @@ class Users extends React.Component {
                                             </Modal.Content>
                                             <Modal.Actions>
                                                 <Button negative onClick={this.close}>No</Button>
-                                                <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={(e) => this.deleteUser(item)}/>
+                                                <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={(e) => this.deleteUser(this.state.userDelete)}/>
                                             </Modal.Actions>
                                         </Modal>
                                     </List.Content>
