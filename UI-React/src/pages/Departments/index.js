@@ -63,15 +63,20 @@ class Departments extends React.Component {
     }
 
     editDepartment = () => {
-        console.log(this.state)
-        const data = {
-            name: this.state.departmentModal,
-            oldname: this.state.department
+        if(this.state.departmentModal === ''){
+            this.setState({ errorDepartment: true })
+        } else {
+            this.setState({ errorDepartment: false })
+            console.log(this.state)
+            const data = {
+                name: this.state.departmentModal,
+                oldname: this.state.department
+            }
+            console.log(data)
+            updateDepartment(data)
+            .then(this.props.history.replace('/Crpdaz'))
+            .catch(err => console.error('Something went wrong.'))
         }
-        console.log(data)
-        updateDepartment(data)
-        .then(this.props.history.replace('/Crpdaz'))
-        .catch(err => console.error('Something went wrong.'))
     }
 
     //updateContent CKeditor
@@ -296,7 +301,7 @@ class Departments extends React.Component {
                                             <Form onSubmit={this.editDepartment}>
                                                 <Form.Field required>
                                                     <label>Department Name</label>
-                                                    <Form.Input name='departmentModal' value={this.state.departmentModal} onChange={this.handleChangeModal} placeholder='Department Name' />
+                                                    <Form.Input name='departmentModal' error={this.state.errorDepartment} value={this.state.departmentModal} onChange={this.handleChangeModal} placeholder='Department Name' />
                                                 </Form.Field>
                                                 <Form.Button content='Submit' />
                                             </Form>
