@@ -1,10 +1,12 @@
 import React from 'react';
 import { login } from '../../api'
+import { Modal , Button } from 'semantic-ui-react'
 
 class Login extends React.Component {
   state = {
     username : '',
-    password : ''
+    password : '',
+    open: false
   }
   onTextChange = (event) => {
     const name = event.target.name
@@ -31,7 +33,11 @@ class Login extends React.Component {
             
         }
       })
+      .catch(this.setState({ open: true , password: "" }))
   }
+
+  close = () => this.setState({ open: false })  
+
   render() {
     return (
         <div class="ui container basic segment">
@@ -76,6 +82,17 @@ class Login extends React.Component {
                     </form>
                     </div>
             </div>
+                                        <Modal size='mini' open={this.state.open}>
+                                            <Modal.Header>
+                                                Alert!
+                                            </Modal.Header>
+                                            <Modal.Content>
+                                                <p>Username or Password is not match.</p>
+                                            </Modal.Content>
+                                            <Modal.Actions>
+                                                <Button negative onClick={this.close}>OK</Button>
+                                            </Modal.Actions>
+                                        </Modal>
         </div>
     );
   }
