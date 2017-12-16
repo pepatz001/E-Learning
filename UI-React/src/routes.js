@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Main from './pages/Main'
 import AdminPage from './pages/AdminPage'
 import Crpdaz from './pages/Crpdaz'
+import Default from './pages/Default'
 
 const Routes = () => {
     return (
@@ -17,10 +18,11 @@ const Routes = () => {
                 <Route exact path="/" component={Main} />
                 <Route exact path="/Crpdaz" component={Crpdaz} />
                 {localStorage.getItem('department') !== 'admin' ? (
-                <Redirect to="/Crpdaz" />
+                <Redirect to="/" />
                 ) : (
                 <Switch>
                     <Route exact path="/admin" component={AdminPage} />
+                    <Route exact path="*" component={Default} />
                 </Switch>
                 )}
             </Switch>
