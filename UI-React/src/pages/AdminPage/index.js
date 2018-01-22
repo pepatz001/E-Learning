@@ -17,6 +17,7 @@ class AdminPage extends React.Component {
 
     componentDidMount(){
         this.setState({ loader: false })
+        // console.log('test')
     }
 
     render() {
@@ -34,7 +35,7 @@ class AdminPage extends React.Component {
                 </Dimmer>
                 <Tab menu={{ color:'black', inverted: true, attached: false, tabular: false }} panes={panes}/>
             </div>
-        );
+        )
     }
 }
 
