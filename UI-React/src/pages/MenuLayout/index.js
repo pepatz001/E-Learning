@@ -1,63 +1,89 @@
 import React from 'react'
-import { Container, Divider, Dropdown, Grid, Header, Image, List, Menu, Segment , Button } from 'semantic-ui-react'
+import { Divider , Dropdown, Container, Icon, Image, Menu, Sidebar, Responsive, Segment, Grid } from "semantic-ui-react"
+import { publishPost, getAllPosts , getDepartment , getUserDepartment } from '../../api'
 
 class MenuLayout extends React.Component {
   
-  state = { 
-    activeItem: 'bio',
-    //data : this.props.data
+  state = {
+    department : "",
+    code: "",
+    contents: [],
+    topics: [],
+    activeItem: '',
+    active: ''
+  }
+
+  mapContent = (list) => {
+    var content = [{topic:"",name:"",code:""}]
+    content = list.filter(item => item.name === this.state.department).map(list => list.content)
+    const topic = []
+    content.forEach( v => topic.indexOf(v.topic) === -1 ? topic.push(v.topic) : null)
+    // console.log(content,topic)
+    this.setState({
+      contents: content,
+      topics: topic
+    })
+  }
+
+  mapUser = (list) => {
+    const item = list.filter(item => item.username === localStorage.username).map(item => item.department)
+    this.setState({department: item[0]})
+    localStorage.setItem('department', this.state.department)
+    if(this.state.department === 'admin'){
+      this.props.history.replace('/admin')
+    } else {
+      getDepartment()
+      .then(data => this.mapContent(data))
+      .catch(err => console.error('Something went wrong.'))
+    }
+  }
+
+  componentWillMount() { 
+    getUserDepartment()
+    .then(user => this.mapUser(user))
+    .catch(err => console.error('Something went wrong.'))
   }
   
-  handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name })
+  handleItemClick = (name,code) => {
+    this.setState({ 
+      activeItem: name,
+      code: code
+    })
+  }
+
+  handleClick = (e, { name }) => this.setState({ active: name })
+
+  logout = () => {
+    this.props.history.replace('/login') //redirect
+    localStorage.clear()
   }
 
   render(){
-    const { activeItem } = this.state
-
+    const { activeItem , topics , contents } = this.state
+    const { active } = this.state
     return (
-      <Menu fixed='left' inverted vertical>
-        <Container>
-          <Menu.Item header>
-            <Image size='massive' src='/asset/images/major-logo-1.png' style={{ marginLeft: '-0.1em' }} />
-          </Menu.Item>
-          <Menu.Item as='a'>Home</Menu.Item>
-          <Menu.Item>
-            <Menu.Header>Products</Menu.Header>
-            <Menu.Menu>
-              <Menu.Item name='enterprise' active={activeItem === 'enterprise'} onClick={this.handleItemClick} />
-              <Menu.Item name='consumer' active={activeItem === 'consumer'} onClick={this.handleItemClick} />
+      <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+          <Menu className='navbar' fixed='Top' borderless>
+            <Menu.Item>
+              <Image size="tiny" src='/assets/images/major-logo-1.png' />
+            </Menu.Item>
+            <Menu.Item className='navbarItem' key='Home' name='Home' active={active === 'Home'} onClick={(e) => this.props.history.replace('/')} />
+            <Menu.Item className='navbarItem' key='Case Study' name='Case Study' active={active === 'Case Study'} onClick={this.handleClick} />
+            <Menu.Item className='navbarItem' key='quiz' name='quiz' active={active === 'quiz'} onClick={this.handleClick} />
+            <Menu.Item className='navbarItem' key='ranking' name='ranking' active={active === 'ranking'} onClick={this.handleClick} />
+            <Menu.Item className='navbarItem' key={this.state.department} name={this.state.department} active={active === this.state.department} onClick={(e) => this.props.history.replace('AllTopic')} />
+            <Menu.Menu position="right">
+              <Menu.Item className='navbarItem' key='logout' name='logout' onClick={(e) => this.logout()} />
             </Menu.Menu>
-          </Menu.Item>
-          <Menu.Item>
-            <Menu.Header>CMS Solutions</Menu.Header>
-            <Menu.Menu>
-              <Menu.Item name='rails' active={activeItem === 'rails'} onClick={this.handleItemClick} />
-              <Menu.Item name='python' active={activeItem === 'python'} onClick={this.handleItemClick} />
-              <Menu.Item name='php' active={activeItem === 'php'} onClick={this.handleItemClick} />
-            </Menu.Menu>
-          </Menu.Item>
-          <Menu.Item>
-            <Menu.Header>Hosting</Menu.Header>
-            <Menu.Menu>
-              <Menu.Item name='shared' active={activeItem === 'shared'} onClick={this.handleItemClick} />
-              <Menu.Item name='dedicated' active={activeItem === 'dedicated'} onClick={this.handleItemClick} />
-            </Menu.Menu>
-          </Menu.Item>
-          <Menu.Item>
-            <Menu.Header>Support</Menu.Header>
-            <Menu.Menu>
-              <Menu.Item name='email' active={activeItem === 'email'} onClick={this.handleItemClick}>
-                E-mail Support
-              </Menu.Item>
-              <Menu.Item name='faq' active={activeItem === 'faq'} onClick={this.handleItemClick}>
-                FAQs
-              </Menu.Item>
-            </Menu.Menu>
-          </Menu.Item>
-          <Menu.Item as='a'>Log out</Menu.Item>
-        </Container>
-      </Menu>
+          </Menu>
+          <div class="ui one vertical bottom fixed item menu footer">
+            <Image src='/assets/images/partner.png' size='large' centered/>
+            <Container textAlign='center'>
+              Copyright © 2015 Major Cineplex Group Plc. All original contents of www.majorcineplex.com ("Site") <br/>
+              including text, graphics, interfaces and design thereof are all rights reserved.
+            </Container>
+          </div>
+        </Responsive>
     )
   }
 }

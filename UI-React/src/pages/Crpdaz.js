@@ -1,9 +1,7 @@
 import React from 'react'
 import localStorage from 'localStorage'
 
-import { publishPost, getAllPosts , getDepartment , getUserDepartment } from '../api'
-import CKEditor from 'react-ckeditor-wrapper'
-import { Grid , Segment , Container, Divider, Dropdown, Header, Image, List, Menu , Button} from 'semantic-ui-react'
+import { getDepartment , getUserDepartment } from '../api'
 
 class Crpdaz extends React.Component {
   state = {

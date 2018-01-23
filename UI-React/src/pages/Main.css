@@ -156,8 +156,8 @@ p , ul , h2{
     border-top: 1px solid #F1B600;
 }
 .ui.grid>[class*="thirteen wide"].column {
-    padding-bottom: 150px !important;
+    padding-bottom: 160px !important;
 }
 .ui.grid>[class*="three wide"].column {
-    padding-bottom: 150px !important;
+    padding-bottom: 160px !important;
 }

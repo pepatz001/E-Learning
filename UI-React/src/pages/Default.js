@@ -1,7 +1,5 @@
 import React from 'react'
 
-import CKEditor from 'react-ckeditor-wrapper'
-
 class Default extends React.Component {
 
   componentWillMount() {

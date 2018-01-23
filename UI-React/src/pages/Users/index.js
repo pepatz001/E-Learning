@@ -1,6 +1,6 @@
 import React from 'react';
 import { signup , getUserDepartment , deleteUser , updateUser , getDepartment } from '../../api'
-import { Segment , List , Tab , Label , Form , Button , Icon , Modal , Dropdown } from 'semantic-ui-react'
+import { Segment , List , Tab , Form , Button , Icon , Modal , Dropdown } from 'semantic-ui-react'
 
 class Users extends React.Component {
     state = {
