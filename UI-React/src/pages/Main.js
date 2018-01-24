@@ -1,7 +1,7 @@
 import React from 'react'
 import localStorage from 'localStorage'
 import './Main.css'
-import MenuLayout from './MenuLayout'
+import Navbar from './Navbar'
 
 // import _ from 'lodash'
 // import { publishPost, getAllPosts , getDepartment , getUserDepartment } from '../api'
@@ -12,7 +12,7 @@ class Main extends React.Component {
   render() {
     return (
       <div className='body'>
-        <MenuLayout history={this.props.history}/>
+        <Navbar history={this.props.history}/>
       </div>
     )
   }

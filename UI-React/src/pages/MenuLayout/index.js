@@ -62,7 +62,7 @@ class MenuLayout extends React.Component {
     const { activeItem , topics , contents } = this.state
     const { active } = this.state
     return (
-      <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+      <div>
           <Menu className='navbar' fixed='Top' borderless>
             <Menu.Item>
               <Image size="tiny" src='/assets/images/major-logo-1.png' />
@@ -76,14 +76,7 @@ class MenuLayout extends React.Component {
               <Menu.Item className='navbarItem' key='logout' name='logout' onClick={(e) => this.logout()} />
             </Menu.Menu>
           </Menu>
-          <div class="ui one vertical bottom fixed item menu footer">
-            <Image src='/assets/images/partner.png' size='large' centered/>
-            <Container textAlign='center'>
-              Copyright © 2015 Major Cineplex Group Plc. All original contents of www.majorcineplex.com ("Site") <br/>
-              including text, graphics, interfaces and design thereof are all rights reserved.
-            </Container>
-          </div>
-        </Responsive>
+      </div>
     )
   }
 }

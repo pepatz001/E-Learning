@@ -1,63 +1,60 @@
 import React from 'react'
-import { Container, Divider, Dropdown, Grid, Header, Image, List, Menu, Segment , Button } from 'semantic-ui-react'
+import { Sidebar , Menu , Responsive , Image , Icon } from 'semantic-ui-react'
 
 class MenuResponsive extends React.Component {
   
-  state = { activeItem: 'bio' }
+  state = { 
+    visible: false,
+  }
   
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handlePusher = () => {
+    const { visible } = this.state
+    if (visible) this.setState({ visible: false })
+  }
+
+  handleToggle = () => this.setState({ visible: !this.state.visible })
 
   render(){
-    const { activeItem } = this.state
+    const { activeItem , visible } = this.state
 
     return (
-      <Menu fixed='left' inverted vertical>
-        <Container>
-          <Menu.Item header>
-            <Image
-              size='mini'
-              src='/asset/images/logo.png'
-              style={{ marginRight: '1.5em' }}
-            />
-            <br/>
-            Project Name Responsive
-          </Menu.Item>
-          <Menu.Item as='a'>Home</Menu.Item>
-          <Menu.Item>
-            <Menu.Header>Products</Menu.Header>
-            <Menu.Menu>
-              <Menu.Item name='enterprise' active={activeItem === 'enterprise'} onClick={this.handleItemClick} />
-              <Menu.Item name='consumer' active={activeItem === 'consumer'} onClick={this.handleItemClick} />
-            </Menu.Menu>
-          </Menu.Item>
-          <Menu.Item>
-            <Menu.Header>CMS Solutions</Menu.Header>
-            <Menu.Menu>
-              <Menu.Item name='rails' active={activeItem === 'rails'} onClick={this.handleItemClick} />
-              <Menu.Item name='python' active={activeItem === 'python'} onClick={this.handleItemClick} />
-              <Menu.Item name='php' active={activeItem === 'php'} onClick={this.handleItemClick} />
-            </Menu.Menu>
-          </Menu.Item>
-          <Menu.Item>
-            <Menu.Header>Hosting</Menu.Header>
-            <Menu.Menu>
-              <Menu.Item name='shared' active={activeItem === 'shared'} onClick={this.handleItemClick} />
-              <Menu.Item name='dedicated' active={activeItem === 'dedicated'} onClick={this.handleItemClick} />
-            </Menu.Menu>
-          </Menu.Item>
-          <Menu.Item>
-            <Menu.Header>Support</Menu.Header>
-            <Menu.Menu>
-              <Menu.Item name='email' active={activeItem === 'email'} onClick={this.handleItemClick}>
-                E-mail Support
+        <Sidebar.Pushable>
+          <Sidebar as={Menu} animation="overlay" icon="labeled" direction='right' inverted vertical visible={visible}>
+            <Menu.Item>
+            <Image centered size="tiny" src='/assets/images/major-logo.png' />
+            </Menu.Item>
+            <Menu.Item name='home' onClick={(e) => this.props.history.replace('/')}>
+              Home
+            </Menu.Item>
+            <Menu.Item name='gamepad'>
+              Case Study
+            </Menu.Item>
+            <Menu.Item name='camera'>
+              Quiz
+            </Menu.Item>
+            <Menu.Item name='gamepad'>
+              Ranking
+            </Menu.Item>
+            <Menu.Item name='camera'>
+              Cinema
+            </Menu.Item>
+          </Sidebar>
+          <Sidebar.Pusher
+            dimmed={visible}
+            onClick={this.handlePusher}
+            style={{ minHeight: "100vh" , top: '60px' , background: 'rgba(28,28,35,0.85)'}}
+          >
+            <Menu fixed="top" inverted>
+              <Menu.Item>
+                <Image size="tiny" src='/assets/images/major-logo-1.png' />
               </Menu.Item>
-              <Menu.Item name='faq' active={activeItem === 'faq'} onClick={this.handleItemClick}>
-                FAQs
+              <Menu.Item position="right" onClick={this.handleToggle}>
+                <Icon name="sidebar" />
               </Menu.Item>
-            </Menu.Menu>
-          </Menu.Item>
-        </Container>
-      </Menu>
+            </Menu>
+            {this.props.children}
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
     )
   }
 }

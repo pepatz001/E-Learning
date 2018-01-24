@@ -107,6 +107,9 @@
     color: #FFDFAA;
     top: 49px;
 }
+.ui[class*="left aligned"].segment {
+    color: #FFDFAA;
+}
 /* ------------------------------------------------ */
 .ui.fixed.menu.footer {
     background: url('/assets/images/Footer.png');
@@ -125,7 +128,7 @@
     font-weight: 300;
     margin-top: 67px;
 }
-.ui.vertical.menu {
+.ui.vertical.Layout.menu {
     width: auto !important;
     margin-top: 14px !important;
 }
@@ -160,4 +163,13 @@ p , ul , h2{
 }
 .ui.grid>[class*="three wide"].column {
     padding-bottom: 160px !important;
+}
+.ui.visible.right.overlay.sidebar {
+    width: 50%;
+    padding-top: 20px;
+}
+.ui.inverted.icon.menu .item {
+    color: #FFDFAA !important;
+    font-family: "Kanit",sans-serif !important;
+    font-weight: 400 !important;
 }
